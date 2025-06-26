@@ -1,21 +1,29 @@
 import { useState } from 'react';
-import { registerUser } from '../lib/api';
 
 export default function Register() {
   const [form, setForm] = useState({ name: '', email: '', password: '' });
   const [message, setMessage] = useState('');
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const res = await registerUser(form);
-      setMessage(res.message);
+      const res = await fetch('https://cejoji-backend.onrender.com/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form)
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        console.error('Server error:', data);
+        setMessage(data.message || 'Registration failed.');
+      } else {
+        setMessage('Registration successful! Please log in.');
+      }
     } catch (err) {
-      setMessage('Registration failed');
+      console.error('Network or server error:', err);
+      setMessage('Something went wrong.');
     }
   };
 
@@ -24,8 +32,8 @@ export default function Register() {
       <h1>Register</h1>
       <form onSubmit={handleSubmit}>
         <input name="name" onChange={handleChange} placeholder="Name" required /><br />
-        <input name="email" type="email" onChange={handleChange} placeholder="Email" required /><br />
-        <input name="password" type="password" onChange={handleChange} placeholder="Password" required /><br />
+        <input type="email" name="email" onChange={handleChange} placeholder="Email" required /><br />
+        <input type="password" name="password" onChange={handleChange} placeholder="Password" required /><br />
         <button type="submit">Register</button>
       </form>
       <p>{message}</p>
