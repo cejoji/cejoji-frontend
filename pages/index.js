@@ -10,7 +10,7 @@ export default function Home() {
         <section className="flex flex-col items-center justify-center text-center py-20 px-4 bg-blue-50">
           <h1 className="text-4xl md:text-6xl font-bold mb-4">Your Next Adventure Starts Here</h1>
           <p className="mb-6 text-lg max-w-xl">Book flights, hotels, and experiences all in one place — easy, trusted, global.</p>
-          <a href="/book" className="px-6 py-3 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition">Book Now</a>
+          <a href="/quiz" className="px-6 py-3 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition">Take the Quiz</a>
         </section>
 
         <section className="py-20 px-4">
