@@ -13,3 +13,11 @@
     "recharts": "^2.6.2"
   }
 }
+"dependencies": {
+  "tailwindcss": "^3.x",
+  "postcss": "^8.x",
+  "autoprefixer": "^10.x",
+  "@heroicons/react": "^2.x",
+  "next": "latest",
+  ...
+}
